@@ -1,10 +1,9 @@
-bps = open('input','r').read().split('\n')
-
 def bp2bin(bp, mapping):
     bp = bp.replace(mapping[0][0], mapping[0][1])
     bp = bp.replace(mapping[1][0], mapping[1][1])
     return(bp)
 
+bps = open('input','r').read().split('\n')
 bin_bps = [ bp2bin(bp[:7], (('F','0'),('B','1'))) + \
             bp2bin(bp[7:], (('L','0'),('R','1'))) for bp in bps if bp ]
 bps = { int(bp,2):bp for bp in bin_bps }
