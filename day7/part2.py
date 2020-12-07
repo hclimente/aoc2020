@@ -10,18 +10,16 @@ rules = [ x.replace(' bags','').replace(' bag','') for x in rules ]
 rules = [ x.split(' contain ') for x in rules if x ]
 rules = { x[0]: insides_parser(x[1]) for x in rules }
 
-def get_nbags(rules, bag, level):
+def get_nbags(rules, bag):
     
     num_bags = 0
-    
+
     for new_bag, reps in rules[bag].items():
         num_bags += reps
-        num_bags += reps * get_nbags(rules, new_bag, level + 1)
-    
-    print(' ' * level, bag, num_bags)
+        num_bags += reps * get_nbags(rules, new_bag)
 
     return(num_bags)
 
-num_bags = get_nbags(rules, 'shiny gold', 0) 
+num_bags = get_nbags(rules, 'shiny gold') 
 
 print(num_bags)
