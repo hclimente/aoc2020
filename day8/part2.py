@@ -1,7 +1,7 @@
 import copy
 
-commands = open(r'input').read().strip('\n').split('\n')
-commands = [ [x.split(' ')[0], int(x.split(' ')[1])] for x in commands ]
+commands = [ x.strip().split() for x in open(r'input').readlines() ]
+commands = [ [cmd, int(inc)] for cmd,inc in commands ]
 switches = {'nop': 'jmp', 'jmp': 'nop'}
 
 def explore_tree(commands, switch, visited, i, acc):
@@ -16,7 +16,7 @@ def explore_tree(commands, switch, visited, i, acc):
         if switch and (cmd in switches):
             commands_cpy = copy.deepcopy(commands)
             commands_cpy[i][0] = switches[commands_cpy[i][0]]
-            dacc = explore_tree(commands_cpy, False, visited, i, acc)
+            dacc = explore_tree(commands_cpy, False, copy.deepcopy(visited), i, acc)
             if dacc:
                 return(dacc)
 

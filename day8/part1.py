@@ -1,5 +1,5 @@
-commands = open(r'input').read().strip('\n').split('\n')
-commands = [ (x.split(' ')[0], int(x.split(' ')[1])) for x in commands ]
+commands = [ x.split() for x in open(r'input').readlines() ]
+commands = [ (cmd, int(inc)) for cmd,inc in commands ]
 
 i = acc = 0
 visited = set()
